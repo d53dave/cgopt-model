@@ -32,5 +32,6 @@
 #include <cereal/types/vector.hpp>
 
 #define __CUDA__
+// this is probably gcc specific
 #define REGISTER( args... ) template<class Archive> \
                         void serialize(Archive & a){ a( args );}
