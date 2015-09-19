@@ -1,0 +1,17 @@
+language: cpp
+
+compiler:
+  - gcc
+
+before_script:
+  - mkdir build
+  - cd build
+  - cmake ..
+
+script: make && make test
+
+notifications:
+   email:
+     - dave@d53dev.net
+   on_success: change
+   on_failure: always

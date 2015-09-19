@@ -63,7 +63,7 @@ namespace CGOpt {
     }
 }
 
-TEST_CASE( "vectors can be sized and resized", "[vector]" ) {
+TEST_CASE( "", "[vector]" ) {
 
     CGOpt::TestOpt opt;
     CGOpt::TestTarget target;
@@ -73,29 +73,11 @@ TEST_CASE( "vectors can be sized and resized", "[vector]" ) {
 
     opt.init_func(target, rands);
 
-//    REQUIRE( v.size() == 5 );
-//    REQUIRE( v.capacity() >= 5 );
-
     SECTION( "Temperature must be decreasing" ) {
         REQUIRE( opt.temp_func(99) < opt.temp_func(100));
-//        REQUIRE( );
     }
-//    SECTION( "resizing smaller changes size but not capacity" ) {
-//        v.resize( 0 );
-//
-//        REQUIRE( v.size() == 0 );
-//        REQUIRE( v.capacity() >= 5 );
-//    }
-//    SECTION( "reserving bigger changes capacity but not size" ) {
-//        v.reserve( 10 );
-//
-//        REQUIRE( v.size() == 5 );
-//        REQUIRE( v.capacity() >= 10 );
-//    }
-//    SECTION( "reserving smaller does not change size or capacity" ) {
-//        v.reserve( 0 );
-//
-//        REQUIRE( v.size() == 5 );
-//        REQUIRE( v.capacity() >= 5 );
-//    }
+
+    SECTION( "" ) {
+
+    }
 }
