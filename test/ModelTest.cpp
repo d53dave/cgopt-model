@@ -76,8 +76,4 @@ TEST_CASE( "", "[vector]" ) {
     SECTION( "Temperature must be decreasing" ) {
         REQUIRE( opt.temp_func(99) < opt.temp_func(100));
     }
-
-    SECTION( "" ) {
-
-    }
 }
