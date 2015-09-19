@@ -1,0 +1,23 @@
+language: cpp
+
+compiler:
+  - gcc
+
+before_script:
+  - wget http://www.cmake.org/files/v3.3/cmake-3.3.2-Linux-x86_64.sh
+<<<<<<< HEAD
+  - sh cmake-3.3.2-Linux-x86_64.sh --prefix=/usr/local --exclude-subdir
+=======
+  - sh cmake-2.6.3-Linux-i386.sh --prefix=/usr/local --exclude-subdir
+>>>>>>> c270a8e69fe4161be4a722a64cdf83299ddf2307
+  - mkdir build
+  - cd build
+  - cmake ..
+
+script: make && make test
+
+notifications:
+   email:
+     - dave@d53dev.net
+   on_success: change
+   on_failure: always
