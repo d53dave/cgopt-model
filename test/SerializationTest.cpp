@@ -3,7 +3,7 @@
 //
 
 #include "TestConfig.h"
-#include "../Target.h"
+#include "../src/Target.h"
 #include <regex>
 
 struct InnerObject {

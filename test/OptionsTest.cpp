@@ -3,7 +3,7 @@
 //
 
 #include "TestConfig.h"
-#include "../Options.h"
+#include "../src/Options.h"
 
 TEST_CASE("Some Test", "[options]"){
     SECTION("Options can be initialized from factory method"){

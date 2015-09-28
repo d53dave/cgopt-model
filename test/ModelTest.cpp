@@ -4,7 +4,7 @@
 
 #include <limits>
 #include "TestConfig.h"
-#include "../Optimization.h"
+#include "../src/Optimization.h"
 
 #define PROBLEM_SIZE 2
 
