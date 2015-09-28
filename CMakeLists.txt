@@ -1,14 +1,18 @@
 cmake_minimum_required(VERSION 3.3)
 project(model)
 
-set (PROJECT_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
+set(PROJECT_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 set(CMAKE_CXX_STANDARD 11) # adds -std=c++11
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(SOURCE_FILES main.cpp ModelSettings.h Target.cpp Target.h Optimization.h Options.h)
+set(SOURCE_FILES ModelSettings.h Target.h Target.cpp Optimization.h Options.h)
+
+set(CMAKE_BUILD_TYPE Release)
 
 include_directories("${PROJECT_INCLUDE_DIR}")
-add_executable(model ${SOURCE_FILES})
+add_library(model ${SOURCE_FILES})
+
+set_target_properties(model PROPERTIES LINKER_LANGUAGE CXX) #this is optional, in case no .cpp file is in project
 
 enable_testing()
 file(GLOB TEST_FILES "test/*.cpp")
@@ -23,3 +27,13 @@ foreach(testFile ${TEST_FILES})
     add_test(NAME ${testName} COMMAND ${testName} )
 endforeach(testFile)
 
+# Add a target to generate API documentation with Doxygen
+find_package(Doxygen)
+if(DOXYGEN_FOUND)
+    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
+    add_custom_target(doc
+            ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
+            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+            COMMENT "Generating API documentation with Doxygen" VERBATIM
+    )
+endif(DOXYGEN_FOUND)

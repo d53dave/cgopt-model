@@ -32,6 +32,7 @@
 #include <cereal/types/vector.hpp>
 
 #define __CUDA__
+#define OPT_TYPE_RETURN double
 // this is probably gcc specific
 #define REGISTER( args... ) template<class Archive> \
                         void serialize(Archive & a){ a( args );}

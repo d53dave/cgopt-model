@@ -28,4 +28,5 @@
 *.app
 
 # IDEA Stuff
+doc/
 .idea/
