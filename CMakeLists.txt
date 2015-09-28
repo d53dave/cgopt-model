@@ -5,7 +5,7 @@ set(PROJECT_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 set(CMAKE_CXX_STANDARD 11) # adds -std=c++11
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(SOURCE_FILES ModelSettings.h Target.h Target.cpp Optimization.h Options.h)
+set(SOURCE_FILES src/ModelSettings.h src/Target.h src/Target.cpp src/Optimization.h src/Options.h)
 
 set(CMAKE_BUILD_TYPE Release)
 

@@ -30,3 +30,4 @@
 # IDEA Stuff
 doc/
 .idea/
+.DS_Store
