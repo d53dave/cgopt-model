@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.3)
 project(model)
 
+include(CTest)
+
 set(PROJECT_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 set(CMAKE_CXX_STANDARD 11) # adds -std=c++11
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
