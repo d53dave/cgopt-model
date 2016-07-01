@@ -16,7 +16,7 @@
 
 //! @def OPT_TYPE_TABLE
 //!
-//! @brief Macro definitions that will define the Options#CGOptimizationType enum and the corresponding
+//! @brief Macro definitions that will define the Options#CSAOptimizationType enum and the corresponding
 //! labels for printing.
 //!
 
@@ -63,22 +63,22 @@ X(SIMPLE, "Simple")     \
 X(GENETIC,"Genetic")    \
 X(GENETIC_DISTRIBUTED, "Genetic (Distributed)")
 
-namespace CGOpt{
+namespace CSAOpt{
     //! @class Options
     //!
-    //! @brief This struct contains the parameters that CGOpt will use for an optimization.
+    //! @brief This struct contains the parameters that CSAOpt will use for an optimization.
     //!
     //! The parameters here will be used for both setup and invocation of an optimization run. Please refer to the
     //! documentation of TODO: fix here
-    //! for further information about the runtime behaviour of CGOpt. This struct is intended to be
+    //! for further information about the runtime behaviour of CSAOpt. This struct is intended to be
     struct Options {
     public:
 
 #define X(a, b) a,
-        //! @enum CGOptimizationType
+        //! @enum CSAOptimizationType
         //!
         //! @brief Macro defined enum for the Optimization Type. See #OPT_TYPE_TABLE
-        enum CGOptimizationType {
+        enum CSAOptimizationType {
             OPT_TYPE_TABLE
         };
 #undef X
@@ -88,7 +88,7 @@ namespace CGOpt{
         //! @enum CGParallelizationType
         //!
         //! @brief Macro defined enum for the Optimization Type. See #PAR_TYPE_TABLE
-        enum CGParallelizationType {
+        enum CSAParallelizationType {
             PAR_TYPE_TABLE
         };
 #undef X
@@ -124,8 +124,8 @@ namespace CGOpt{
         size_t maxRounds;       //!< Maximum number of rounds that the optimization is allowed to run
         size_t syncAfterRounds; //!< Number of rounds after which threads will communicate intermediate results (see TODO: fill in)
         size_t maxTimeMs;       //!< Maximum amount of time (ms) that the optimization is allowed to take
-        CGParallelizationType parallelizationType;  //!< Parallelization Type that the Optimization will use
-        CGOptimizationType optimizationType;        //!< Optimization Type that the Optimization will use
+        CSAParallelizationType parallelizationType;  //!< Parallelization Type that the Optimization will use
+        CSAOptimizationType optimizationType;        //!< Optimization Type that the Optimization will use
         bool tracing;           //!< Tracing modes returns all intermediate results and can be used for analysis
 
         friend std::ostream& operator<<(std::ostream& os, const Options& opt);
@@ -149,7 +149,7 @@ namespace CGOpt{
 
     std::ostream& operator<<(std::ostream& os, const Options& opt)
     {
-        os << "CGOpt::Options = {";
+        os << "CSAOpt::Options = {";
         os << "\n\t Optimization Type:\t\t" << opt.OPT_LABELS[opt.optimizationType];
         os << "\n\t Parallelization Type:\t" << opt.PAR_LABELS[opt.parallelizationType];
         os << "\n\t # of Threads:\t\t\t" << opt.nThreads;

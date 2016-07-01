@@ -4,7 +4,7 @@
 #pragma once
 #include "ModelSettings.h"
 
-namespace CGOpt{
+namespace CSAOpt{
     //! @class Target
     //!
     //! @brief

@@ -7,8 +7,8 @@
 
 TEST_CASE("Some Test", "[options]"){
     SECTION("Options can be initialized from factory method"){
-        CGOpt::Options opt = CGOpt::Options::defaultOptions();
+        CSAOpt::Options opt = CSAOpt::Options::defaultOptions();
 
-        REQUIRE( opt.optimizationType == CGOpt::Options::SINGLEPRECISION);
+        REQUIRE( opt.optimizationType == CSAOpt::Options::SINGLEPRECISION);
     }
 }

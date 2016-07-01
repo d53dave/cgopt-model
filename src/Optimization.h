@@ -21,7 +21,7 @@
 #include "ModelSettings.h"
 #include "Target.h"
 
-namespace CGOpt{
+namespace CSAOpt{
     //! @class Optimization
     //!
     //! @brief A short description of the class

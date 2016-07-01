@@ -8,7 +8,7 @@
 
 #define PROBLEM_SIZE 2
 
-namespace CGOpt {
+namespace CSAOpt {
 
     //
     //
@@ -70,8 +70,8 @@ namespace CGOpt {
 
 TEST_CASE( "", "[vector]" ) {
 
-    CGOpt::TestOpt opt;
-    CGOpt::TestTarget target;
+    CSAOpt::TestOpt opt;
+    CSAOpt::TestTarget target;
     target.energy = 42.0;
 
     double rands[]{1.0, 2.0};
@@ -83,9 +83,9 @@ TEST_CASE( "", "[vector]" ) {
     }
 
     SECTION( "2D Rosenbrock function has its minimum 0 at (1,1)" ){
-        CGOpt::TestTarget state;
+        CSAOpt::TestTarget state;
 
-        CGOpt::TestTarget bestTarget;
+        CSAOpt::TestTarget bestTarget;
         bestTarget.energy = HUGE_VAL;
 
         for(double i = -10; i <= 10; i+=.1 ){

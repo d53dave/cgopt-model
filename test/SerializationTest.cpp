@@ -12,7 +12,7 @@ struct InnerObject {
     REGISTER(intAttr);
 };
 
-class TestTarget : public CGOpt::Target {
+class TestTarget : public CSAOpt::Target {
 public:
     std::string stringAttr;
     unsigned long long numberAttr;
