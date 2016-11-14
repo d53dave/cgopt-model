@@ -4,7 +4,7 @@
 // This header contains settings for the model classes and allows the framework to inject some definitions before
 #pragma once
 
-#include <cereal/archives/json.hpp> //for debugging
+#include <cereal/archives/json.hpp>
 #include <cereal/archives/portable_binary.hpp>
 
 #include <cereal/types/array.hpp>
