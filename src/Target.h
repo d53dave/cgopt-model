@@ -9,7 +9,7 @@ namespace CSAOpt{
     //!
     //! @brief
     //!
-    class Target {
+    class Target : BASE {
     public:
 
     };

@@ -36,3 +36,11 @@
 // this is probably gcc specific
 #define REGISTER( args... ) template<class Archive> \
                         void serialize(Archive & a){ a( args );}
+
+#ifdef ENABLE_CUDAMANAGED
+#define BASE CudaManaged
+#include "internal/CudaManaged.h"
+#else
+#define BASE EmptyBase
+#include "internal/EmptyBase.h"
+#endif

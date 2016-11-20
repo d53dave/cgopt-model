@@ -21,6 +21,7 @@
 #include "ModelSettings.h"
 #include "Target.h"
 
+
 namespace CSAOpt{
     //! @class Optimization
     //!
@@ -29,7 +30,7 @@ namespace CSAOpt{
     //! A more detailed class description
     //! goes here.
     //!
-    class Optimization {
+    class Optimization : BASE {
     public:
 
         //!
