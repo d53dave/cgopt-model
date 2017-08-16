@@ -25,15 +25,37 @@
 namespace CSAOpt{
     //! @class Optimization
     //!
-    //! @brief A short description of the class
+    //! @brief This class defines the interface for the Simulated Annealing optimization.
     //!
-    //! A more detailed class description
-    //! goes here.
+    //! This is the *core* class of CSAOpt. It defines the interface that a user must implement
+    //! in order ot be able to actually do optimization computations. 
+    //! 
+    //! This defines the methods that the Simulated Annealing algorithm will call. Those are
+    //! (1) `intialize`, a method to generate an initial state
+    //! (2) `generateNext`, a method to generate a new state from an existing state
+    //! (3) `evaluate`, a method to assign a score (or energy) to a given state
+    //! (4) `cool`, a method to calculate the new SA temperature after an iteration
     //!
+    //! The Optimization Runner will call the mentioned methods according to this pseudocode:
+    //! def simulated_annealing(k_max, initial_temp):
+    //!     state = initialize(empty_state, random_values)
+    //!     old_temp = initial_temp
+    //!     for 0 to k_max:
+    //!         t = cool(old_temp)
+    //!         new_state = generateNext(state, random_values)
+    //!         if acceptance_func(evaluate(state), evaluate(new_state), t) >= rand(0, 1):
+    //!             state = new_state
+    //!
+    //!     return state
+    //!
+    //! Where the acceptance_func is, classically, defined as
+    //! def acceptance_func(e1, e2, temp):
+    //!     return exp(-(e2 - e1) / temp)
     class Optimization : BASE {
     public:
 
-        //!
+        //! This enum is used to define from what distribution the random values
+        //! that are passed to the various methods will be drawn from.
         enum RandomDistr {
             normal,     //!< Normal Distribution
             uniform     //!< Uniform Distribution
