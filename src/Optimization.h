@@ -51,6 +51,10 @@ namespace CSAOpt{
     //! Where the acceptance_func is, classically, defined as
     //! def acceptance_func(e1, e2, temp):
     //!     return exp(-(e2 - e1) / temp)
+    //!
+    //! In the following interface, the return type is OPT_TYPE_RETURN, which will correspond to 
+    //! either float or double, based on the chosen configuration. This token will be substuted
+    //! by the preprocessor when the model is compiled in preparation of the optimization run
     class Optimization : BASE {
     public:
 
@@ -61,36 +65,39 @@ namespace CSAOpt{
             uniform     //!< Uniform Distribution
         };
 
-        //! @brief A short function descriptions
+        //! @brief Method to get an initial state for Simulated Annealing
         //!
-        //! The longer version goes here
-        //! even on multiple lines
+        //! This method will be called by during the initialization of the simulated
+        //! annealing run. A new state object (i.e. target) will be created and passed to
+        //! the method, along with a vector of random numbers according to the problem size. 
+        //! The method is therefore expected to compute an initial state based on the passed
+        //! random values and mutate the state object.
         //!
-        //! @param state This usually would be
-        //! @param rands This is random
-        //! @return The initialized Target
+        //! @param state a newly instantiated Target object
+        //! @param rands a vector of random values according to the chosen random distribution
+        //! @return The initialized Target (i.e. mutated 'empty' state)
         //!
         __CUDA__ virtual Target &           initialize   (Target & state, double *const rands) const = 0;
 
-        //! @brief A short function descriptions
+        //! @brief Method to generate a random neighbor state based on a previous state
         //!
-        //! The longer version goes here
-        //! even on multiple lines
+        //! For each iteration of the algorithm, a new state will be generated based on the previous 
+        //! state. The alrogithm will therefore pass the previous state and a vector of random values
+        //! to this method. The method is expected to create a new state and return it.
         //!
-        //! @param state This usually would be
-        //! @param rands This is random
-        //! @return The initialized Target
+        //! @param state the previous state (initial state for first iteration, potentially other states later)
+        //! @param rands vector of random values according to the configured problem size.
+        //! @return A new state, based on the previous state and the passed in random values
         //!
         __CUDA__ virtual Target &           generateNext   (Target & state, double *const rands) const = 0;
 
-        //! @brief A short function descriptions
+        //! @brief Map a state to an energy (or score)
         //!
-        //! The longer version goes here
-        //! even on multiple lines
+        //! In order to determine that a state is better than another, the algorithmn needs to derive
+        //! a value based on a given state. 
         //!
-        //! @param state This usually would be
-        //! @param rands This is random
-        //! @return The initialized Target
+        //! @param state state to be evaluated
+        //! @return a 
         //!
         __CUDA__ virtual OPT_TYPE_RETURN    evaluate (Target & state) const  = 0;
 
