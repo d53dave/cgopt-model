@@ -101,14 +101,14 @@ namespace CSAOpt{
         //!
         __CUDA__ virtual OPT_TYPE_RETURN    evaluate (Target & state) const  = 0;
 
-        //! @brief A short function descriptions
+        //! @brief Determines the new temperature after an iteration of the algorithm
         //!
-        //! The longer version goes here
-        //! even on multiple lines
+        //! This method is expected to calculate a new temperature based on the previous one.
+        //! The new temperature should be lower than the previous one and the overall temprature
+        //! should move towards 0 across the iterations of the optimization.
         //!
-        //! @param state This usually would be
-        //! @param rands This is random
-        //! @return The initialized Target
+        //! @param oldtemp previous temperature
+        //! @return new temperature (which should be lower than the old one)
         //!
         __CUDA__ virtual OPT_TYPE_RETURN    cool   (double oldtemp) const  = 0;
     protected:
