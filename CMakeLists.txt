@@ -12,7 +12,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/CMakeModu
 
 set (PROJECT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
-set(SOURCE_FILES src/ModelSettings.h src/Target.h src/Target.cpp src/Optimization.h src/Options.h)
+set(SOURCE_FILES src/ModelSettings.h src/State.h src/State.cpp src/Optimization.h src/Options.h)
 
 set(CMAKE_BUILD_TYPE Debug)
 

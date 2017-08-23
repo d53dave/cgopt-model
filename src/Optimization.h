@@ -19,7 +19,7 @@
 
 #pragma once
 #include "ModelSettings.h"
-#include "Target.h"
+#include "State.h"
 
 
 namespace CSAOpt{
@@ -73,11 +73,11 @@ namespace CSAOpt{
         //! The method is therefore expected to compute an initial state based on the passed
         //! random values and mutate the state object.
         //!
-        //! @param state a newly instantiated Target object
+        //! @param state a newly instantiated State object
         //! @param rands a vector of random values according to the chosen random distribution
-        //! @return The initialized Target (i.e. mutated 'empty' state)
+        //! @return The initialized State (i.e. mutated 'empty' state)
         //!
-        __CUDA__ virtual Target &           initialize   (Target & state, double *const rands) const = 0;
+        __CUDA__ virtual State &           initialize   (State & state, double *const rands) const = 0;
 
         //! @brief Method to generate a random neighbor state based on a previous state
         //!
@@ -89,7 +89,7 @@ namespace CSAOpt{
         //! @param rands vector of random values according to the configured problem size.
         //! @return A new state, based on the previous state and the passed in random values
         //!
-        __CUDA__ virtual Target &           generateNext   (Target & state, double *const rands) const = 0;
+        __CUDA__ virtual State &           generateNext   (State & state, double *const rands) const = 0;
 
         //! @brief Map a state to an energy (or score)
         //!
@@ -99,7 +99,7 @@ namespace CSAOpt{
         //! @param state state to be evaluated
         //! @return a 
         //!
-        __CUDA__ virtual OPT_TYPE_RETURN    evaluate (Target & state) const  = 0;
+        __CUDA__ virtual OPT_TYPE_RETURN    evaluate (State & state) const  = 0;
 
         //! @brief Determines the new temperature after an iteration of the algorithm
         //!

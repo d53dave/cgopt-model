@@ -13,7 +13,7 @@ namespace CSAOpt {
     //
     //
 
-    class TestTarget : public Target {
+    class TestState : public State {
     public:
         double coords[PROBLEM_SIZE];
         double energy;
@@ -24,11 +24,11 @@ namespace CSAOpt {
 
     class TestOpt : public Optimization {
     public:
-        __CUDA__ virtual Target &initialize(Target &state, double *rands) const;
+        __CUDA__ virtual State &initialize(State &state, double *rands) const;
 
-        __CUDA__ virtual Target &generateNext(Target &state, double *rands) const;
+        __CUDA__ virtual State &generateNext(State &state, double *rands) const;
 
-        __CUDA__ virtual OPT_TYPE_RETURN evaluate(Target &state) const;
+        __CUDA__ virtual OPT_TYPE_RETURN evaluate(State &state) const;
 
         __CUDA__ virtual OPT_TYPE_RETURN cool(double oldtemp) const;
 
@@ -36,26 +36,26 @@ namespace CSAOpt {
     };
 
 
-    __CUDA__ Target &TestOpt::initialize(Target &state, double *rands) const {
+    __CUDA__ State &TestOpt::initialize(State &state, double *rands) const {
         return generateNext(state, rands);
     }
 
-    __CUDA__ Target &TestOpt::generateNext(Target &state, double *rands) const {
-        for (size_t i = 0; i < ((TestTarget &) state).problemSize(); ++i) {
-            ((TestTarget &) state).coords[i] += denormalizeNext(rands[i]);
+    __CUDA__ State &TestOpt::generateNext(State &state, double *rands) const {
+        for (size_t i = 0; i < ((TestState &) state).problemSize(); ++i) {
+            ((TestState &) state).coords[i] += denormalizeNext(rands[i]);
         }
         return state;
     }
 
-    __CUDA__ double TestOpt::evaluate(Target &state) const {
+    __CUDA__ double TestOpt::evaluate(State &state) const {
         double result, t1, t2;
-        double *input = ((TestTarget &) state).coords;
-        for (size_t i = 0; i < ((TestTarget &) state).problemSize() - 1; ++i) {
+        double *input = ((TestState &) state).coords;
+        for (size_t i = 0; i < ((TestState &) state).problemSize() - 1; ++i) {
             t1 = (1 - input[i]);
             t2 = (input[i + 1] - input[i] * input[i]);
             result += t2 * t2 + 100 * (t1 * t1);
         }
-        ((TestTarget &) state).energy = result;
+        ((TestState &) state).energy = result;
         return result;
     }
 
@@ -71,37 +71,37 @@ namespace CSAOpt {
 TEST_CASE( "", "[vector]" ) {
 
     CSAOpt::TestOpt opt;
-    CSAOpt::TestTarget target;
-    target.energy = 42.0;
+    CSAOpt::TestState state;
+    state.energy = 42.0;
 
     double rands[]{1.0, 2.0};
 
-    opt.initialize(target, rands);
+    opt.initialize(state, rands);
 
     SECTION( "Temperature must be decreasing" ) {
         REQUIRE( opt.cool(99) < opt.cool(100));
     }
 
     SECTION( "2D Rosenbrock function has its minimum 0 at (1,1)" ){
-        CSAOpt::TestTarget state;
+        CSAOpt::TestState state;
 
-        CSAOpt::TestTarget bestTarget;
-        bestTarget.energy = HUGE_VAL;
+        CSAOpt::TestState bestState;
+        bestState.energy = HUGE_VAL;
 
         for(double i = -10; i <= 10; i+=.1 ){
             for(double j = -10; j<= 10; j+=.1){
                 state.coords[0] = i;
                 state.coords[1] = j;
-                if( opt.evaluate(state) < bestTarget.energy){
-                    bestTarget.energy = opt.evaluate(state);
-                    bestTarget.coords[0] = state.coords[0];
-                    bestTarget.coords[1] = state.coords[1];
+                if( opt.evaluate(state) < bestState.energy){
+                    bestState.energy = opt.evaluate(state);
+                    bestState.coords[0] = state.coords[0];
+                    bestState.coords[1] = state.coords[1];
                 }
             }
         }
 
-        REQUIRE( bestTarget.energy == Approx(0).scale(0).epsilon(1e7));
-        REQUIRE( bestTarget.coords[0] == Approx(1).scale(0).epsilon(1e7));
-        REQUIRE( bestTarget.coords[1] == Approx(1).scale(0).epsilon(1e7));
+        REQUIRE( bestState.energy == Approx(0).scale(0).epsilon(1e7));
+        REQUIRE( bestState.coords[0] == Approx(1).scale(0).epsilon(1e7));
+        REQUIRE( bestState.coords[1] == Approx(1).scale(0).epsilon(1e7));
     }
 }
