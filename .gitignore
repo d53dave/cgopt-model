@@ -31,3 +31,6 @@
 doc/
 .idea/
 .DS_Store
+
+# Testing
+**/Testing/
