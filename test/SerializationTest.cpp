@@ -3,7 +3,7 @@
 //
 
 #include "TestConfig.h"
-#include "../src/Target.h"
+#include "../src/State.h"
 #include <regex>
 
 struct InnerObject {
@@ -12,7 +12,7 @@ struct InnerObject {
     REGISTER(intAttr);
 };
 
-class TestTarget : public CSAOpt::Target {
+class TestState : public CSAOpt::State {
 public:
     std::string stringAttr;
     unsigned long long numberAttr;
@@ -23,8 +23,8 @@ public:
     REGISTER(stringAttr, numberAttr, vectorAttr, innerObjectAttr);
 };
 
-TEST_CASE( "Targets can be serialized and deserialized", "[target]" ) {
-    TestTarget t;
+TEST_CASE( "States can be serialized and deserialized", "[target]" ) {
+    TestState t;
     t.stringAttr = std::string{"test string 42"};
     t.numberAttr = 42;
     t.vectorAttr.push_back(std::string{"another test string"});
@@ -64,7 +64,7 @@ TEST_CASE( "Targets can be serialized and deserialized", "[target]" ) {
         {
             cereal::JSONInputArchive iarchive(ss);
 
-            TestTarget deserialized;
+            TestState deserialized;
             iarchive(deserialized);
 
             REQUIRE( deserialized.numberAttr == t.numberAttr);

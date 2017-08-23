@@ -106,7 +106,7 @@ namespace CSAOpt{
         //! - Sync after rounds: 0 (value is extraneous for parallelization type 'Simple')
         //! - Trace mode: no
         //!
-        //! @return The initialized Target
+        //! @return The initialized State
         //!
         static Options defaultOptions() {
             Options opt;

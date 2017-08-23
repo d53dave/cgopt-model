@@ -5,11 +5,11 @@
 #include "ModelSettings.h"
 
 namespace CSAOpt{
-    //! @class Target
+    //! @class State
     //!
     //! @brief
     //!
-    class Target : BASE {
+    class State : BASE {
     public:
 
     };
